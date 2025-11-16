@@ -1,139 +1,380 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BTY | Bilişim Teknolojileri ve Yazılım</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+         :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --bg: #f8fafc;
+            --bg-dark: #0f172a;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            background: #f2f2f2;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
         header {
-            background: #0d6efd;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 30px 20px;
+            padding: 50px 20px 60px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(20px);
+            }
+        }
+        
+        header img.logo {
+            width: 70px;
+            height: 70px;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0 10px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .banner {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+        
         nav {
-            background: #222;
-            padding: 12px;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
+        
         nav a {
-            color: white;
-            margin: 15px;
+            color: var(--text);
+            padding: 15px 20px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            position: relative;
         }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
         nav a:hover {
-            color: #0d6efd;
+            color: var(--primary);
         }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
         .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
         .card {
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
         h2 {
-            margin-top: 0;
+            font-size: 1.5rem;
+            margin: 0 0 20px 0;
+            color: var(--text);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        
+        .card h2::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .card ul {
+            list-style: none;
+        }
+        
+        .card ul li {
+            padding: 10px 0;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .card a:hover {
+            color: var(--secondary);
+            transform: translateX(3px);
+        }
+        
+        .card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
         footer {
-            background: #222;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 100%);
             color: white;
             text-align: center;
-            padding: 12px;
-            margin-top: 40px;
+            padding: 40px 20px;
+            margin-top: 60px;
+            font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .thumb-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .thumb-gallery img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .thumb-gallery img:hover {
+            transform: scale(1.05) rotate(-1deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            nav {
+                gap: 0;
+            }
+            nav a {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+            .container {
+                padding: 25px 15px;
+            }
+            .card {
+                padding: 24px;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<header>
-    <h1>Bilişim Teknolojileri ve Yazılım Dersi</h1>
-    <p>Çiğdem Öğretmen ile Teknoloji Yolculuğu</p>
-</header>
+    <header>
+        <h1>Bilişim Teknolojileri ve Yazılım Dersi</h1>
+        <p>Çiğdem Öğretmen ile Teknoloji Yolculuğu</p>
+    </header>
 
-<nav>
-    <a href="#konular">Kazanımlar</a>
-    <a href="#etkinlikler">Etkinlikler</a>
-    <a href="#projeler">Projeler</a>
-    <a href="#videolar">Videolar</a>
-    <a href="#sunumlar">Ders Sunumları</a>
-    <a href="#kategori">Sınıf Kategori</a>
-</nav>
 
-<nav style="background:#444; padding:10px; text-align:center;">
-    <a href="#sunumlar" style="color:white; margin:15px; text-decoration:none; font-weight:bold;">Ders Sunumları</a>
-</nav>
 
-<div class="container">
+    <nav>
+        <a href="#konular">Kazanımlar</a>
+        <a href="#etkinlikler">Etkinlikler</a>
+        <a href="#projeler">Projeler</a>
+        <a href="#sunumlar">Sunumlar</a>
+        <a href="#galeri">Galeri</a>
+        <a href="#iletisim">İletişim</a>
+    </nav>
 
-    <div id="konular" class="card">
-        <h2>📘 Kazanımlar</h2>
-        <ul>
-            <li>Bilgisayarın Temel Donanımları</li>
-            <li>Algoritmik Düşünme ve Akış Şemaları</li>
-            <li>Scratch ile Kodlama</li>
-            <li>3B Tasarım (Tinkercad)</li>
-            <li>Güvenli İnternet Kullanımı</li>
-            <li>Web Tasarımı (HTML-CSS)</li>
-        </ul>
+    <div class="container">
+
+        <div id="konular" class="card">
+            <h2>📘 Kazanımlar</h2>
+            <ul>
+                <li>Bilgisayarın Temel Donanımları</li>
+                <li>Algoritmik Düşünme</li>
+                <li>Scratch ile Kodlama</li>
+                <li>3B Tasarım (Tinkercad)</li>
+                <li>Güvenli İnternet</li>
+                <li>Web Tasarımı</li>
+            </ul>
+        </div>
+
+        <div id="etkinlikler" class="card">
+            <h2>🎯 Etkinlikler</h2>
+            <p>Derslerde yapılan uygulamalar ve etkinlikler bu bölümde yayınlanacaktır.</p>
+        </div>
+
+        <div id="projeler" class="card">
+            <h2>💡 Öğrenci Projeleri</h2>
+            <p>Öğrencilerin yaptığı projeler sınıf bazlı olarak ayrı sayfalarda listelenecektir.</p>
+            <ul>
+                <li><a href="5sinif.html">5. Sınıf Projeleri</a></li>
+                <li><a href="6sinif.html">6. Sınıf Projeleri</a></li>
+            </ul>
+        </div>
+
+        <div id="sunumlar" class="card">
+            <h2>📂 5. Sınıf Ders Sunumları</h2>
+            <ul>
+                <li><a href="pdf/5sinif_hafta1.pdf">Hafta 1 – Giriş</a></li>
+                <li><a href="pdf/5sinif_hafta2.pdf">Hafta 2 – Algoritma</a></li>
+                <li><a href="pdf/5sinif_hafta3.pdf">Hafta 3 – Scratch</a></li>
+            </ul>
+        </div>
+
+        <div id="sunumlar-6" class="card">
+            <h2>📂 6. Sınıf Ders Sunumları</h2>
+            <ul>
+                <li><a href="pdf/6sinif_hafta1.pdf">Hafta 1 – İleri Giriş</a></li>
+                <li><a href="pdf/6sinif_hafta2.pdf">Hafta 2 – İleri Algoritma</a></li>
+                <li><a href="pdf/6sinif_hafta3.pdf">Hafta 3 – İleri Scratch</a></li>
+            </ul>
+        </div>
+
+        <div id="galeri" class="card">
+            <h2>🖼️ Fotoğraf Galerisi</h2>
+            <div class="thumb-gallery">
+                <img src="img/ders1.jpg" alt="Ders Fotoğrafı" />
+                <img src="img/ders2.jpg" alt="Etkinlik Fotoğrafı" />
+                <img src="img/ders3.jpg" alt="Kodlama Fotoğrafı" />
+            </div>
+            <p>Daha fazla fotoğraf yakında eklenecek.</p>
+        </div>
+
+        <div id="iletisim" class="card">
+            <h2>📬 İletişim</h2>
+            <p>İletişim için e‑posta: <strong>bty.cigdem@gmail.com</strong></p>
+        </div>
+
     </div>
 
-    <div id="etkinlikler" class="card">
-        <h2>🎯 Etkinlikler</h2>
-        <p>Derslerde yapılan uygulama çalışmalarının tamamı burada paylaşılacaktır.</p>
-    </div>
-
-    <div id="projeler" class="card">
-        <h2>💡 Projeler</h2>
-        <p>Öğrencilerimizin yıl içinde hazırladığı projeler yakında eklenecek.</p>
-    </div>
-
-    <div id="videolar" class="card">
-        <h2>🎥 Videolar</h2>
-        <p>Ders anlatım videoları burada yayınlanacaktır.</p>
-    </div>
-
-    <div id="iletisim" class="card">
-        <h2>📬 İletişim</h2>
-        <p>Her türlü soru için: <strong>bty.cigdem@example.com</strong></p>
-    </div>
-
-    <div id="sunumlar" class="card">
-        <h2>📂 Haftalık Ders Sunumları</h2>
-        <p>PDF sunum dosyalarınız eklendikçe otomatik listelenecek şekilde yapılandırıldı.</p>
-        <ul>
-            <li><a href="pdf/hafta1.pdf">Hafta 1 – Bilgisayarı Tanıyalım</a></li>
-            <li><a href="pdf/hafta2.pdf">Hafta 2 – Algoritma Nedir?</a></li>
-            <li><a href="pdf/hafta3.pdf">Hafta 3 – Scratch Başlangıç</a></li>
-        </ul>
-        <p>Yeni PDF dosyaları yüklemek için: <strong>/pdf</strong> klasörüne eklemeniz yeterlidir.</p>
-    </div>
-
-    <div id="kategori" class="card">
-        <h2>📁 Sınıf Kategorileri</h2>
-        <ul>
-            <li><a href="5sinif.html">5. Sınıflar Ders Sunumları</a></li>
-            <li><a href="6sinif.html">6. Sınıflar Ders Sunumları</a></li>
-        </ul>
-        <p>Her sınıf için ayrı sunum sayfaları oluşturulmuştur.</p>
-    </div>
-
-</div>
-<footer>
-    © 2025 BTY Dersi | Çiğdem Öğretmen
-</footer>
+    <footer>
+        © 2025 BTY Dersi | Çiğdem Öğretmen
+    </footer>
 
 </body>
+
 </html>
